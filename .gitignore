@@ -1,0 +1,14 @@
+HardwareDebug
+.settings
+.cproject
+.Debuglinker
+.info
+.project
+.HardwareDebuglinker
+.vscode
+custom.bat
+makefile.init
+umouse Debug.launch
+umouse HardwareDebug.launch
+tool/UWebApp/umouse_webapp/node_modules
+*build/
