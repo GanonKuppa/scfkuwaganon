@@ -15,6 +15,7 @@
 // HardwareAbstractionLayer
 #include "hal_clock.h"
 #include "hal_timer.h"
+#include "hal_uart.h"
 
 
 // プロトタイプ宣言
@@ -46,18 +47,22 @@ int main(void) {
     startUpInit();
     while(1) {
         char hoge[100];
-        sprintf( hoge, "[WARNING] " );
+        sprintf( &hoge[0], "0123456789\n" );
         // TODO: add application code here
+        hal::waitmsec(1000);
+        hal::putnbyteUart0((uint8_t *)hoge, 10);
+        hal::putnbyteUart1((uint8_t *)hoge, 10);
+        hal::sendDataUart1();
     }
     return 0;
 }
 
 //各ペリフェラルの初期化
-void halInit() {
-    //クロック
+void halInit() {    
     hal::initClock();
     hal::initTimer();
-
+    hal::initUart0();
+    hal::initUart1();
 }
 
 

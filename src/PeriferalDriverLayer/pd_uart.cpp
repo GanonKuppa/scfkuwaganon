@@ -1,11 +1,9 @@
 #include <stdint.h>
-#include <queue>
 #include <deque>
 
 #include "pd_uart.h"
 #include "iodefine.h"
 
-using std::queue;
 using std::deque;
 
 namespace periferal_driver {
@@ -42,18 +40,14 @@ namespace periferal_driver {
 
     }
 
-    /***********1byte送信関数*******************/
-    void put1byteSCI1(char c) {
-        while ( SCI1.SSR.BIT.TEND == 0)
-            ;
+    void put1byteSCI1(uint8_t c) {
+        while ( SCI1.SSR.BIT.TEND == 0);
         SCI1.TDR = c;
     }
-    /***********nbyte送信関数*******************/
-    void putnbyteSCI1(char* buf, int len) {
-        int c;
 
-        for (c = 0; c < len; c++) {
-            put1byteSCI1(buf[c]);
+    void putnbyteSCI1(uint8_t* buf, uint16_t len) {
+        for (uint16_t i = 0; i < len; i++) {
+            put1byteSCI1(buf[i]);
         }
     }
 
@@ -94,54 +88,47 @@ namespace periferal_driver {
     }
 
     /***********SCIFA9用送受信バッファ*******************/
-    queue<uint8_t> transBuff; //送信用データバッファ
-    uint8_t recieveBuff[512];
-    uint16_t recieveBuffCount = 0;
+    static std::deque<uint8_t> sendBuf; //送信用データバッファ
+    static std::deque<uint8_t> recvBuf;//受信用データバッファ
 
-//deque<uint8_t> recieveBuff;//受信用データバッファ
+    std::deque<uint8_t>& getSendBufSCIFA9(){
+        return sendBuf;
+    }
+
+    std::deque<uint8_t>& getRecvBufSCIFA9(){
+        return recvBuf;
+    }
 
     /***********nbyte送信関数*******************/
     void putnbyteSCIFA9(uint8_t* buf, uint16_t len) {
-        int c;
-
-        for (c = 0; c < len; c++) {
-            transBuff.push(buf[c]);
+        for (uint16_t i = 0; i < len; i++) {
+            sendBuf.push_back(buf[i]);
         }
-
     }
     /***********受信バッファの中身を取り出す関数******************/
-    /*    void recieveDataSCIFA9(){
-     if(SCIFA9.FSR.BIT.BRK == 1)SCIFA9.FSR.BIT.BRK = 0;
-     if(SCIFA9.LSR.BIT.ORER == 1)SCIFA9.LSR.BIT.ORER = 0;
-     if(SCIFA9.FDR.BIT.R == 0) return;
-     while (SCIFA9.FDR.BIT.R != 0){
-     recieveBuff.push_back((uint8_t)(SCIFA9.FRDR));
-     }
-     }
-     */
-
-    void recieveDataSCIFA9() {
-        if (SCIFA9.FSR.BIT.BRK == 1) SCIFA9.FSR.BIT.BRK = 0;
-        if (SCIFA9.LSR.BIT.ORER == 1) SCIFA9.LSR.BIT.ORER = 0;
-        if (SCIFA9.FDR.BIT.R == 0) return;
-        while (SCIFA9.FDR.BIT.R != 0) {
-            recieveBuff[recieveBuffCount % 512] = (uint8_t) (SCIFA9.FRDR);
-            recieveBuffCount++;
-            recieveBuffCount %= 512;
+    //この関数はタイマ割り込み関数内で周期的に呼び出すこと
+    void recvDataSCIFA9(){
+        uint8_t count = 0;
+        if(SCIFA9.FSR.BIT.BRK == 1)SCIFA9.FSR.BIT.BRK = 0;
+        if(SCIFA9.LSR.BIT.ORER == 1)SCIFA9.LSR.BIT.ORER = 0;
+        if(SCIFA9.FDR.BIT.R == 0) return;
+        while (SCIFA9.FDR.BIT.R != 0 && count < 16){
+            recvBuf.push_back((uint8_t)(SCIFA9.FRDR));
+            count++;
         }
     }
 
+
     /*************送信バッファの中身を送信する関数***************/
-//この関数はタイマ割り込み関数内で周期的に呼び出すこと
+    //この関数はタイマ割り込み関数内で周期的に呼び出すこと
     void sendDataSCIFA9() {
         //if (SCIFA9.FDR.BIT.T == 0x) return;
         uint8_t count = 0;
-        while (SCIFA9.FDR.BIT.T < 0x10) {
-            if (transBuff.empty() == true) return;
-            SCIFA9.FTDR = transBuff.front();
-            transBuff.pop();
+        while (SCIFA9.FDR.BIT.T < 0x10 && count < 16) {
+            if (sendBuf.empty() == true) return;
+            SCIFA9.FTDR = sendBuf.front();
+            sendBuf.pop_front();
             count++;
-            if (count == 16) return;
         }
     }
 

@@ -8,7 +8,7 @@ HardwareDebug
 .vscode
 custom.bat
 makefile.init
-umouse Debug.launch
-umouse HardwareDebug.launch
+umouse_scfkuwaganon Debug.launch
+umouse_scfkuwaganon HardwareDebug.launch
 tool/UWebApp/umouse_webapp/node_modules
 *build/
