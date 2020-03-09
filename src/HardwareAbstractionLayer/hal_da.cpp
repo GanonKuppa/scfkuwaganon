@@ -3,19 +3,19 @@
 
 namespcae hal{
     void initDA(){
-#ifndef SITL
+#ifndef SILS
         periferal_driver::initDA();
 #endif
     }
 
     void setDA(float da){
-#ifndef SITL
+#ifndef SILS
         periferal_driver::setDA(da * (DA_RESOLUTION - 1))
 #endif
     }
     
     float getDA(){
-#ifndef SITL
+#ifndef SILS
         return periferal_driver::getDA / (DA_RESOLUTION - 1);
 #else 
         return 0;
