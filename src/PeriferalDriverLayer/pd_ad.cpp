@@ -10,7 +10,7 @@
 
 
 namespace periferal_driver{
-    void initAD(void) {
+    void initAD() {
         SYSTEM.PRCR.WORD = 0xA502;
         MSTP(S12AD) = 0;
         SYSTEM.PRCR.WORD = 0xA500;
@@ -173,7 +173,7 @@ namespace periferal_driver{
 
     }
 
-uint16_t startAD_AN000(void) {
+uint16_t startAD_AN000() {
     S12AD.ADANSA0.WORD = 0x0001;
     S12AD.ADADS0.BIT.ADS0 = 0x0000; //1:変換値加算モード選択 0：非選択
     //S12AD.ADADC.BIT.ADC   = 3; //加算回数の選択 4times変換 3times加算
@@ -187,7 +187,7 @@ uint16_t startAD_AN000(void) {
     return S12AD.ADDR0;
 }
 
-uint16_t startAD_AN001(void) {
+uint16_t startAD_AN001() {
     S12AD.ADANSA0.WORD = 0x0002;
     S12AD.ADADS0.BIT.ADS0 = 0x0000; //1:変換値加算モード選択 0：非選択
     //S12AD.ADADC.BIT.ADC   = 3; //加算回数の選択 4times変換 3times加算
@@ -201,7 +201,7 @@ uint16_t startAD_AN001(void) {
     return S12AD.ADDR1;
 }
 
-uint16_t startAD_AN002(void) {
+uint16_t startAD_AN002() {
     S12AD.ADANSA0.WORD = 0x0004;
     S12AD.ADADS0.BIT.ADS0 = 0x0000; //1:変換値加算モード選択 0：非選択
     //S12AD.ADADC.BIT.ADC   = 3; //加算回数の選択 4times変換 3times加算
@@ -215,7 +215,7 @@ uint16_t startAD_AN002(void) {
     return S12AD.ADDR2;
 }
 
-uint16_t startAD_AN003(void) {
+uint16_t startAD_AN003() {
     S12AD.ADANSA0.WORD = 0x0008;
     S12AD.ADADS0.BIT.ADS0 = 0x0000; //1:変換値加算モード選択 0：非選択
     //S12AD.ADADC.BIT.ADC   = 3; //加算回数の選択 4times変換 3times加算
@@ -229,7 +229,7 @@ uint16_t startAD_AN003(void) {
     return S12AD.ADDR3;
 }
 
-uint16_t startAD_AN004(void) {
+uint16_t startAD_AN004() {
     S12AD.ADANSA0.WORD = 0x0010;
     S12AD.ADADS0.BIT.ADS0 = 0x0000; //1:変換値加算モード選択 0：非選択
     //S12AD.ADADC.BIT.ADC   = 3; //加算回数の選択 4times変換 3times加算
@@ -243,7 +243,7 @@ uint16_t startAD_AN004(void) {
     return S12AD.ADDR4;
 }
 
-uint16_t startAD_AN005(void) {
+uint16_t startAD_AN005() {
     S12AD.ADANSA0.WORD = 0x0020;
     S12AD.ADADS0.BIT.ADS0 = 0x0000; //1:変換値加算モード選択 0：非選択
     //S12AD.ADADC.BIT.ADC   = 3; //加算回数の選択 4times変換 3times加算
@@ -257,7 +257,7 @@ uint16_t startAD_AN005(void) {
     return S12AD.ADDR5;
 }
 
-uint16_t startAD_AN006(void) {
+uint16_t startAD_AN006() {
     S12AD.ADANSA0.WORD = 0x0040;
     S12AD.ADADS0.BIT.ADS0 = 0x0000; //1:変換値加算モード選択 0：非選択
     //S12AD.ADADC.BIT.ADC   = 3; //加算回数の選択 4times変換 3times加算
@@ -271,7 +271,7 @@ uint16_t startAD_AN006(void) {
     return S12AD.ADDR6;
 }
 
-uint16_t startAD_AN007(void) {
+uint16_t startAD_AN007() {
     S12AD.ADANSA0.WORD = 0x0080;
     S12AD.ADADS0.BIT.ADS0 = 0x0000; //1:変換値加算モード選択 0：非選択
     //S12AD.ADADC.BIT.ADC   = 3; //加算回数の選択 4times変換 3times加算
@@ -285,7 +285,7 @@ uint16_t startAD_AN007(void) {
     return S12AD.ADDR7;
 }
 
-uint16_t startAD_AN100(void) {
+uint16_t startAD_AN100() {
     S12AD1.ADANSA0.WORD = 0x0001;
     S12AD1.ADADS1.BIT.ADS1 = 0x0000; //1:変換値加算モード選択 0：非選択
     //S12AD.ADADC.BIT.ADC   = 3; //加算回数の選択 4times変換 3times加算
@@ -299,7 +299,7 @@ uint16_t startAD_AN100(void) {
     return S12AD1.ADDR0;
 }
 
-uint16_t startAD_AN101(void) {
+uint16_t startAD_AN101() {
     S12AD1.ADANSA0.WORD = 0x0002;
     S12AD1.ADADS1.BIT.ADS1 = 0x0000; //1:変換値加算モード選択 0：非選択
     //S12AD.ADADC.BIT.ADC   = 3; //加算回数の選択 4times変換 3times加算
@@ -313,7 +313,7 @@ uint16_t startAD_AN101(void) {
     return S12AD1.ADDR1;
 }
 
-uint16_t startAD_AN102(void) {
+uint16_t startAD_AN102() {
     S12AD1.ADANSA0.WORD = 0x0004;
     S12AD1.ADADS1.BIT.ADS1 = 0x0000; //1:変換値加算モード選択 0：非選択
     //S12AD.ADADC.BIT.ADC   = 3; //加算回数の選択 4times変換 3times加算
@@ -327,7 +327,7 @@ uint16_t startAD_AN102(void) {
     return S12AD1.ADDR2;
 }
 
-uint16_t startAD_AN103(void) {
+uint16_t startAD_AN103() {
     S12AD1.ADANSA0.WORD = 0x0008;
     S12AD1.ADADS1.BIT.ADS1 = 0x0000; //1:変換値加算モード選択 0：非選択
     //S12AD.ADADC.BIT.ADC   = 3; //加算回数の選択 4times変換 3times加算
@@ -341,7 +341,7 @@ uint16_t startAD_AN103(void) {
     return S12AD1.ADDR3;
 }
 
-uint16_t startAD_AN104(void) {
+uint16_t startAD_AN104() {
     S12AD1.ADANSA0.WORD = 0x0010;
     S12AD1.ADADS1.BIT.ADS1 = 0x0000; //1:変換値加算モード選択 0：非選択
     //S12AD.ADADC.BIT.ADC   = 3; //加算回数の選択 4times変換 3times加算
@@ -355,7 +355,7 @@ uint16_t startAD_AN104(void) {
     return S12AD1.ADDR4;
 }
 
-uint16_t startAD_AN105(void) {
+uint16_t startAD_AN105() {
     S12AD1.ADANSA0.WORD = 0x0020;
     S12AD1.ADADS1.BIT.ADS1 = 0x0000; //1:変換値加算モード選択 0：非選択
     //S12AD.ADADC.BIT.ADC   = 3; //加算回数の選択 4times変換 3times加算
@@ -369,7 +369,7 @@ uint16_t startAD_AN105(void) {
     return S12AD1.ADDR5;
 }
 
-uint16_t startAD_AN106(void) {
+uint16_t startAD_AN106() {
     S12AD1.ADANSA0.WORD = 0x0040;
     S12AD1.ADADS1.BIT.ADS1 = 0x0000; //1:変換値加算モード選択 0：非選択
     //S12AD.ADADC.BIT.ADC   = 3; //加算回数の選択 4times変換 3times加算
@@ -382,7 +382,7 @@ uint16_t startAD_AN106(void) {
     return S12AD1.ADDR6;
 }
 
-uint16_t startAD_AN107(void) {
+uint16_t startAD_AN107() {
     S12AD1.ADANSA0.WORD = 0x0040;
     S12AD1.ADADS1.BIT.ADS1 = 0x0000; //1:変換値加算モード選択 0：非選択
     //S12AD.ADADC.BIT.ADC   = 3; //加算回数の選択 4times変換 3times加算
@@ -395,7 +395,7 @@ uint16_t startAD_AN107(void) {
     return S12AD1.ADDR7;
 }
 
-uint16_t startAD_AN108(void) {
+uint16_t startAD_AN108() {
     S12AD1.ADANSA0.WORD = 0x0100;
     S12AD1.ADADS1.BIT.ADS1 = 0x0000; //1:変換値加算モード選択 0：非選択
     //S12AD.ADADC.BIT.ADC   = 3; //加算回数の選択 4times変換 3times加算
@@ -408,7 +408,7 @@ uint16_t startAD_AN108(void) {
     return S12AD1.ADDR8;
 }
 
-uint16_t startAD_AN109(void) {
+uint16_t startAD_AN109() {
     S12AD1.ADANSA0.WORD = 0x0200;
     S12AD1.ADADS1.BIT.ADS1 = 0x0000; //1:変換値加算モード選択 0：非選択
     //S12AD.ADADC.BIT.ADC   = 3; //加算回数の選択 4times変換 3times加算
@@ -421,7 +421,7 @@ uint16_t startAD_AN109(void) {
     return S12AD1.ADDR9;
 }
 
-uint16_t startAD_AN110(void) {
+uint16_t startAD_AN110() {
     S12AD1.ADANSA0.WORD = 0x0400;
     S12AD1.ADADS1.BIT.ADS1 = 0x0000; //1:変換値加算モード選択 0：非選択
     //S12AD.ADADC.BIT.ADC   = 3; //加算回数の選択 4times変換 3times加算
@@ -434,7 +434,7 @@ uint16_t startAD_AN110(void) {
     return S12AD1.ADDR10;
 }
 
-uint16_t startAD_AN111(void) {
+uint16_t startAD_AN111() {
     S12AD1.ADANSA0.WORD = 0x0800;
     S12AD1.ADADS1.BIT.ADS1 = 0x0000; //1:変換値加算モード選択 0：非選択
     //S12AD.ADADC.BIT.ADC   = 3; //加算回数の選択 4times変換 3times加算
@@ -447,7 +447,7 @@ uint16_t startAD_AN111(void) {
     return S12AD1.ADDR11;
 }
 
-uint16_t startAD_AN112(void) {
+uint16_t startAD_AN112() {
     S12AD1.ADANSA0.WORD = 0x1000;
     S12AD1.ADADS1.BIT.ADS1 = 0x0000; //1:変換値加算モード選択 0：非選択
     //S12AD.ADADC.BIT.ADC   = 3; //加算回数の選択 4times変換 3times加算
@@ -460,7 +460,7 @@ uint16_t startAD_AN112(void) {
     return S12AD1.ADDR12;
 }
 
-uint16_t startAD_AN113(void) {
+uint16_t startAD_AN113() {
     S12AD1.ADANSA0.WORD = 0x2000;
     S12AD1.ADADS1.BIT.ADS1 = 0x0000; //1:変換値加算モード選択 0：非選択
     //S12AD.ADADC.BIT.ADC   = 3; //加算回数の選択 4times変換 3times加算
@@ -474,73 +474,73 @@ uint16_t startAD_AN113(void) {
 }
 
 
-uint16_t getAD_AN000(void) {
+uint16_t getAD_AN000() {
     return S12AD.ADDR0;
 }
-uint16_t getAD_AN001(void) {
+uint16_t getAD_AN001() {
     return S12AD.ADDR1;
 }
-uint16_t getAD_AN002(void) {
+uint16_t getAD_AN002() {
     return S12AD.ADDR2;
 }
-uint16_t getAD_AN003(void) {
+uint16_t getAD_AN003() {
     return S12AD.ADDR3;
 }
-uint16_t getAD_AN004(void) {
+uint16_t getAD_AN004() {
     return S12AD.ADDR4;
 }
-uint16_t getAD_AN005(void) {
+uint16_t getAD_AN005() {
     return S12AD.ADDR5;
 }
-uint16_t getAD_AN006(void) {
+uint16_t getAD_AN006() {
     return S12AD.ADDR6;
 }
-uint16_t getAD_AN007(void) {
+uint16_t getAD_AN007() {
     return S12AD.ADDR7;
 }
 
-uint16_t getAD_AN100(void) {
+uint16_t getAD_AN100() {
     return S12AD1.ADDR0;
 }
-uint16_t getAD_AN101(void) {
+uint16_t getAD_AN101() {
     return S12AD1.ADDR1;
 }
-uint16_t getAD_AN102(void) {
+uint16_t getAD_AN102() {
     return S12AD1.ADDR2;
 }
-uint16_t getAD_AN103(void) {
+uint16_t getAD_AN103() {
     return S12AD1.ADDR3;
 }
-uint16_t getAD_AN104(void) {
+uint16_t getAD_AN104() {
     return S12AD1.ADDR4;
 }
-uint16_t getAD_AN105(void) {
+uint16_t getAD_AN105() {
     return S12AD1.ADDR5;
 }
-uint16_t getAD_AN106(void) {
+uint16_t getAD_AN106() {
     return S12AD1.ADDR6;
 }
-uint16_t getAD_AN107(void) {
+uint16_t getAD_AN107() {
     return S12AD1.ADDR7;
 }
 
-uint16_t getAD_AN108(void) {
+uint16_t getAD_AN108() {
     return S12AD1.ADDR8;
 }
-uint16_t getAD_AN109(void) {
+uint16_t getAD_AN109() {
     return S12AD1.ADDR9;
 }
-uint16_t getAD_AN110(void) {
+uint16_t getAD_AN110() {
     return S12AD1.ADDR10;
 }
 
-uint16_t getAD_AN111(void) {
+uint16_t getAD_AN111() {
     return S12AD1.ADDR11;
 }
-uint16_t getAD_AN112(void) {
+uint16_t getAD_AN112() {
     return S12AD1.ADDR12;
 }
-uint16_t getAD_AN113(void) {
+uint16_t getAD_AN113() {
     return S12AD1.ADDR13;
 }
 

@@ -14,8 +14,17 @@
 
 // HardwareAbstractionLayer
 #include "hal_clock.h"
+#include "hal_gpio.h"
 #include "hal_timer.h"
 #include "hal_uart.h"
+#include "hal_ad.h"
+#include "hal_da.h"
+#include "hal_flashRom.h"
+#include "hal_phaseCounting.h"
+#include "hal_pwm.h"
+#include "hal_spi.h"
+#include "hal_timerInterrupt.h"
+#include "hal_wdt.h"
 
 
 // プロトタイプ宣言
@@ -42,6 +51,18 @@ extern void __main() {
 }
 #endif
 
+extern "C" void timerInterrupt0();
+extern "C" void timerInterrupt1();
+
+void timerInterrupt0(){
+    //http://japan.renesasrulz.com/cafe_rene/f/69/t/1515.aspx 多重割り込み 資料
+    __builtin_rx_setpsw('I');
+}
+
+void timerInterrupt1(){
+
+}
+
 int main(void) {
     halInit();
     startUpInit();
@@ -60,9 +81,24 @@ int main(void) {
 //各ペリフェラルの初期化
 void halInit() {    
     hal::initClock();
+    hal::initGpio();
     hal::initTimer();
     hal::initUart0();
     hal::initUart1();
+    hal::initAD();
+    hal::initDA();
+    hal::initFlashRom();
+    hal::initPhaseCounting0();
+    hal::initPhaseCounting1();
+    hal::initPWM0();
+    hal::initPWM1();
+    hal::initPWM2();
+    hal::initPWM3();
+    hal::initSPI0();
+    hal::initTimerInterrupt0();
+    hal::initTimerInterrupt1();
+    hal::initWdt();
+
 }
 
 

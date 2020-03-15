@@ -1,5 +1,8 @@
-#include "pd_wdt.h"
 #include "hal_wdt.h"
+
+#ifndef SILS
+#include "pd_wdt.h"
+#endif
 
 namespace hal{
     void resetWdt(){

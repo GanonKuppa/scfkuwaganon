@@ -1,7 +1,9 @@
 #include <stdint.h>
 #include "hal_timer.h"
-#include "pd_timer.h"
 
+#ifndef SILS
+#include "pd_timer.h"
+#endif
 namespace hal {
     void initTimer() {
 #ifndef SILS

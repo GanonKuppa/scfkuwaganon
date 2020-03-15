@@ -14,8 +14,8 @@ namespace hal {
     void recvDataUart1();
     void sendDataUart1();
 
-    std::deque<uint8_t>& getSendBufSCIFA9();
-    std::deque<uint8_t>& getRecvBufSCIFA9();
+    std::deque<uint8_t>& getSendBufUart1();
+    std::deque<uint8_t>& getRecvBufUart1();
 }
 
 

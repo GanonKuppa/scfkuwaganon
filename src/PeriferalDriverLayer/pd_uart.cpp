@@ -8,7 +8,7 @@ using std::deque;
 
 namespace periferal_driver {
 
-    void initSCI1(void) {
+    void initSCI1() {
         SYSTEM.PRCR.WORD = 0xA502;
         MSTP( SCI1 ) = 0; //モジュールストップを解除
         SYSTEM.PRCR.WORD = 0xA500;

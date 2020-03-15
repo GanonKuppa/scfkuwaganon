@@ -1,8 +1,11 @@
 #include <stdint.h>
 #include <deque>
 
-#include "pd_uart.h"
 #include "hal_uart.h"
+
+#ifndef SILS
+#include "pd_uart.h"
+#endif
 
 using std::deque;
 

@@ -11,5 +11,5 @@ namespace periferal_driver {
     constexpr uint32_t PCLKC = 48000000;
     constexpr uint32_t PCLKD = 48000000;
 
-    void initClock(void);
+    void initClock();
 }

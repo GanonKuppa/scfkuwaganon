@@ -95,10 +95,12 @@ void INT_Excep_ICU_SWINT2(void) { }
 void INT_Excep_ICU_SWINT(void) { }
 
 //;0x0070  CMI0
-void INT_Excep_CMT0_CMI0(void) { }
+extern void timerInterrupt0();
+void INT_Excep_CMT0_CMI0(void) {timerInterrupt0();}
 
 //;0x0074  CMI1
-void INT_Excep_CMT1_CMI1(void) { }
+extern void timerInterrupt1();
+void INT_Excep_CMT1_CMI1(void) {timerInterrupt1();}
 
 //;0x0078  CMWI0
 void INT_Excep_CMTW0_CMWI0(void) { }

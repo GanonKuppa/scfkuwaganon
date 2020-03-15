@@ -1,6 +1,9 @@
 #include <stdint.h>
-#include "pd_ad.h"
 #include "hal_ad.h"
+
+#ifndef SILS
+#include "pd_ad.h"
+#endif
 
 namespace hal{
     void initAD(){

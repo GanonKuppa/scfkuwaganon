@@ -99,7 +99,7 @@ namespace periferal_driver {
     }
 
 
-    uint32_t getTimeuCount(void) {
+    uint32_t getTimeuCount() {
         return CMTW1.CMWCNT / u_count;
     }
 
@@ -149,7 +149,7 @@ namespace periferal_driver {
     }
     ;
 
-    uint32_t getTimeuCount_sub(void) {
+    uint32_t getTimeuCount_sub() {
         return TPU0.TCNT / 3;
     }
 

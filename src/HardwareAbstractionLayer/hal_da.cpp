@@ -1,5 +1,8 @@
-#include "pd_da.h"
 #include "hal_da.h"
+
+#ifndef SILS
+#include "pd_da.h"
+#endif
 
 namespace hal{
     void initDA(){
