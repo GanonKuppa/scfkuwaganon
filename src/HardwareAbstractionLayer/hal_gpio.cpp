@@ -1,5 +1,8 @@
-#include "pd_gpio.h"
 #include "hal_gpio.h"
+
+#ifndef SILS
+#include "pd_gpio.h"
+#endif
 
 namespace hal{
 

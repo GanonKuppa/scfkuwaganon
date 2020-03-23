@@ -26,6 +26,8 @@
 #include "hal_timerInterrupt.h"
 #include "hal_wdt.h"
 
+// Module
+#include "ledController.h"
 
 // プロトタイプ宣言
 void halInit();
@@ -57,6 +59,8 @@ extern "C" void timerInterrupt1();
 void timerInterrupt0(){
     //http://japan.renesasrulz.com/cafe_rene/f/69/t/1515.aspx 多重割り込み 資料
     __builtin_rx_setpsw('I');
+
+    module::LedController::getInstance().update();
 }
 
 void timerInterrupt1(){
@@ -71,9 +75,15 @@ int main(void) {
         sprintf( &hoge[0], "0123456789\n" );
         // TODO: add application code here
         hal::waitmsec(1000);
+        module::LedController::getInstance().turnFcled(false, false, false);
+        //hal::setDout2(0);
+        hal::waitmsec(1000);
         hal::putnbyteUart0((uint8_t *)hoge, 10);
         hal::putnbyteUart1((uint8_t *)hoge, 10);
         hal::sendDataUart1();
+        //hal::setDout2(1);
+        module::LedController::getInstance().turnFcled(true, true, true);
+
     }
     return 0;
 }
@@ -104,12 +114,12 @@ void halInit() {
 
 //起動時の処理
 void startUpInit() {
-
+    hal::startTimerInterrupt0();
 }
 
 
-void object_init() {
-
+void object_init() {    
+    //module::LedController::getInstance().setDeltaT(0.00025);
 }
 
 
