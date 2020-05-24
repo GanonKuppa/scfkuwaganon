@@ -71,19 +71,8 @@ int main(void) {
     halInit();
     startUpInit();
     while(1) {
-        char hoge[100];
-        sprintf( &hoge[0], "0123456789\n" );
-        // TODO: add application code here
-        hal::waitmsec(1000);
-        module::LedController::getInstance().turnFcled(false, false, false);
-        //hal::setDout2(0);
-        hal::waitmsec(1000);
-        hal::putnbyteUart0((uint8_t *)hoge, 10);
-        hal::putnbyteUart1((uint8_t *)hoge, 10);
-        hal::sendDataUart1();
-        //hal::setDout2(1);
-        module::LedController::getInstance().turnFcled(true, true, true);
-
+        auto activity = ActivityFactory::createModeSelect();
+        activity->start();
     }
     return 0;
 }

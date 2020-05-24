@@ -5,7 +5,7 @@
 
 
 namespace periferal_driver{
-    void initDA(void) {
+    void initDA() {
         SYSTEM.PRCR.WORD = 0xA502;
         MSTP(DA) = 0;
         SYSTEM.PRCR.WORD = 0xA500;
