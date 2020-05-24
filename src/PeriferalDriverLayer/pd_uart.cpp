@@ -91,11 +91,11 @@ namespace periferal_driver {
     static std::deque<uint8_t> sendBuf; //送信用データバッファ
     static std::deque<uint8_t> recvBuf;//受信用データバッファ
 
-    std::deque<uint8_t>& getSendBufSCIFA9(){
+    std::deque<uint8_t>& getSendBufSCIFA9() {
         return sendBuf;
     }
 
-    std::deque<uint8_t>& getRecvBufSCIFA9(){
+    std::deque<uint8_t>& getRecvBufSCIFA9() {
         return recvBuf;
     }
 
@@ -107,12 +107,12 @@ namespace periferal_driver {
     }
     /***********受信バッファの中身を取り出す関数******************/
     //この関数はタイマ割り込み関数内で周期的に呼び出すこと
-    void recvDataSCIFA9(){
+    void recvDataSCIFA9() {
         uint8_t count = 0;
         if(SCIFA9.FSR.BIT.BRK == 1)SCIFA9.FSR.BIT.BRK = 0;
         if(SCIFA9.LSR.BIT.ORER == 1)SCIFA9.LSR.BIT.ORER = 0;
         if(SCIFA9.FDR.BIT.R == 0) return;
-        while (SCIFA9.FDR.BIT.R != 0 && count < 16){
+        while (SCIFA9.FDR.BIT.R != 0 && count < 16) {
             recvBuf.push_back((uint8_t)(SCIFA9.FRDR));
             count++;
         }

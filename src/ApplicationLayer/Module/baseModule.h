@@ -1,26 +1,26 @@
 #pragma once
 
-namespace module{
+namespace module {
     template <class T>
-    class BaseModule{
+    class BaseModule {
       public:
         virtual void update() = 0;
-        virtual void setDeltaT(float delta_t){_delta_t = delta_t;}
-        
-        static T &getInstance() { 
+        virtual void setDeltaT(float delta_t) {_delta_t = delta_t;}
+
+        static T& getInstance() {
             static T _instance;
             return _instance;
         }
 
       protected:
         float _delta_t;
-        BaseModule(){}
+        BaseModule() {}
 
       private:
-        BaseModule(const BaseModule &) = delete;
-        BaseModule& operator=(const BaseModule &) = delete;
-        BaseModule(BaseModule &&) = delete;
-        BaseModule& operator=(BaseModule &&) = delete;
+        BaseModule(const BaseModule&) = delete;
+        BaseModule& operator=(const BaseModule&) = delete;
+        BaseModule(BaseModule&&) = delete;
+        BaseModule& operator=(BaseModule&&) = delete;
 
     };
 }

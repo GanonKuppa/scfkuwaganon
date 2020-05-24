@@ -2,8 +2,8 @@
 #include "iodefine.h"
 #include "pd_gpio.h"
 
-namespace periferal_driver{
-    void initGpio(){
+namespace periferal_driver {
+    void initGpio() {
         //未使用ピンの処理
         PORT0.PDR.BYTE = (uint8_t) (PORT0.PDR.BYTE | 0x0F);
         PORT1.PDR.BYTE = (uint8_t) (PORT1.PDR.BYTE | 0x03);
@@ -28,31 +28,31 @@ namespace periferal_driver{
         PORT0.PDR.BIT.B7 = 1; //SLED_OUT4
     }
 
-    void setDoutPD4(bool out){
+    void setDoutPD4(bool out) {
         PORTD.PODR.BIT.B4 = out;
     }
 
-    void setDoutPD3(bool out){
+    void setDoutPD3(bool out) {
         PORTD.PODR.BIT.B3 = out;
     }
 
-    void setDoutPD2(bool out){
+    void setDoutPD2(bool out) {
         PORTD.PODR.BIT.B2 = out;
     }
 
-    void setDoutPE0(bool out){
+    void setDoutPE0(bool out) {
         PORTE.PODR.BIT.B0 = out;
     }
 
-    void setDoutPD7(bool out){
+    void setDoutPD7(bool out) {
         PORTD.PODR.BIT.B7 = out;
     }
 
-    void setDoutPD0(bool out){
+    void setDoutPD0(bool out) {
         PORTD.PODR.BIT.B0 = out;
     }
 
-    void setDoutP07(bool out){
+    void setDoutP07(bool out) {
         PORT0.PODR.BIT.B7 = out;
     }
 

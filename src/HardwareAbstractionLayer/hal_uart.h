@@ -4,7 +4,7 @@
 #include <deque>
 
 namespace hal {
-    
+
     void initUart0();
     void put1byteUart0(uint8_t c);
     void putnbyteUart0(uint8_t* buf, uint16_t len);

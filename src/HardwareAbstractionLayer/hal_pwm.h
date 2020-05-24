@@ -1,6 +1,6 @@
 #pragma once
 
-namespace hal{
+namespace hal {
     void initPWM0();
     void initPWM1();
     void initPWM2();

@@ -1,9 +1,9 @@
 #pragma once
 
-namespace hal{
+namespace hal {
 
     void initGpio();
-    
+
     void setDout0(bool out);
     void setDout1(bool out);
     void setDout2(bool out);

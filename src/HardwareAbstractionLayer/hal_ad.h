@@ -2,7 +2,7 @@
 
 #include <stdint.h>
 
-namespace hal{
+namespace hal {
     void initAD();
 
     uint16_t startAD0();

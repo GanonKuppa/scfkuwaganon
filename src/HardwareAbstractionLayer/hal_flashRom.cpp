@@ -4,68 +4,68 @@
 #ifndef SILS
 #include "pd_flashRom.h"
 #endif
-namespace hal{
+namespace hal {
 
-    bool initFlashRom(){
+    bool initFlashRom() {
 #ifndef SILS
         return periferal_driver::initDataFlash();
-#elif
+#else
         return true;
 #endif
     }
 
-    uint8_t readFlashRom(uint32_t org){
+    uint8_t readFlashRom(uint32_t org) {
 #ifndef SILS
         return periferal_driver::readDataFlash(org);
-#elif
+#else
         return 0;
 #endif
     }
 
-    bool readFlashRom(uint32_t org, void* dst, uint32_t len){
+    bool readFlashRom(uint32_t org, void* dst, uint32_t len) {
 #ifndef SILS
         return periferal_driver::readDataFlash(org, dst, len);
-#elif
+#else
         return true;
 #endif
     }
 
-    bool eraseCheckFlashRom(uint32_t org, uint32_t len){
+    bool eraseCheckFlashRom(uint32_t org, uint32_t len) {
 #ifndef SILS
         return periferal_driver::eraseCheckDataFlash(org, len);
-#elif
+#else
         return true;
 #endif
     }
 
-    bool eraseFlashRom(uint32_t org){
+    bool eraseFlashRom(uint32_t org) {
 #ifndef SILS
         return periferal_driver::eraseDataFlash(org);
-#elif
+#else
         return true;
 #endif
     }
-    
-    bool eraseAllFlashRom(){
+
+    bool eraseAllFlashRom() {
 #ifndef SILS
         return periferal_driver::eraseAllDataFlash();
-#elif
+#else
         return true;
 #endif
     }
 
-    bool writeFlashRom(uint32_t org, const void* src, uint32_t len){
+    bool writeFlashRom(uint32_t org, const void* src, uint32_t len) {
 #ifndef SILS
         return periferal_driver::writeDataFlash(org, src, len);
-#elif
+#else
         return true;
 #endif
     }
 
-    bool writeFlashRom(uint32_t org, uint8_t data){
+    bool writeFlashRom(uint32_t org, uint8_t data) {
 #ifndef SILS
         return periferal_driver::writeDataFlash(org, data);
-#elif
+#else
         return true;
 #endif
     }

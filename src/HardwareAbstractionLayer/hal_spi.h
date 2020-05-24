@@ -2,7 +2,7 @@
 
 #include <stdint.h>
 
-namespace hal{
+namespace hal {
     void initSPI0();
     void initSPI1();
     uint8_t communicate8bitSPI0(uint8_t transmit);

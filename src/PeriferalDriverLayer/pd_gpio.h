@@ -1,6 +1,6 @@
 #pragma once
 
-namespace periferal_driver{
+namespace periferal_driver {
     void initGpio();
 
     void setDoutPD4(bool out);

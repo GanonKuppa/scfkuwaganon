@@ -1,6 +1,6 @@
 #pragma once
 
-namespace hal{
+namespace hal {
     void resetWdt();
     void initWdt();
     void startWdt();

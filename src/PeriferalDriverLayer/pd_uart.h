@@ -14,7 +14,7 @@ namespace periferal_driver {
     void putnbyteSCIFA9(uint8_t* buf, uint16_t len);
     void recvDataSCIFA9();
     void sendDataSCIFA9();
-    
+
     std::deque<uint8_t>& getSendBufSCIFA9();
     std::deque<uint8_t>& getRecvBufSCIFA9();
 

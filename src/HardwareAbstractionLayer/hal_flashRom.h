@@ -1,7 +1,7 @@
 #pragma once
 #include <stdint.h>
 
-namespace hal{
+namespace hal {
     constexpr uint32_t FLASH_BLOCK_NUM = 1024;
     constexpr uint32_t FLASH_BLOCK_BYTE_SIZE = 64;
 

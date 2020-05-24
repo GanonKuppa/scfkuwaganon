@@ -85,7 +85,6 @@ function makeProxy(data) {
 }
 
 function doJsonCmd(data) {
-  console.log(data);
   
   try{
     let cmd = data["cmd"];
@@ -113,15 +112,9 @@ function doJsonCmd(data) {
         break;
       case 'SET_ROBOT_POS':
         umobj.setRobotPos(data["x"], data["y"], data["ang"]);
-        SOrbitControls.x = data["x"];
-        SOrbitControls.y = data["y"];
-        SOrbitControls.ang = data["ang"];
-        SOrbitControls.v = data["v"];
         break;
       case 'SET_TARGET_POS':
-        SOrbitControls.x_target = data["x"];
-        SOrbitControls.y_target = data["y"];
-        SOrbitControls.v_target = data["v"];
+        break;
       case 'SET_WALLS_WITHOUT_OUTER_32':
         if(!data["transparent_v_mask_hex"]) data["transparent_v_mask_hex"] = "00000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000";
         if(!data["transparent_h_mask_hex"]) data["transparent_h_mask_hex"] = "00000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000";        
@@ -151,6 +144,7 @@ function doJsonCmd(data) {
   
   } catch (error) {
     console.log(error);
+    console.log(data)
   }
   
 

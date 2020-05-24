@@ -2,7 +2,7 @@
 
 #include <stdint.h>
 
-namespace hal{
+namespace hal {
     void initTimerInterrupt0();
     void setPriorityTimerInterrupt0(uint8_t priori);
     void startTimerInterrupt0();

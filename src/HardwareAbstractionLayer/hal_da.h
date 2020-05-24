@@ -2,7 +2,7 @@
 
 #include <stdint.h>
 
-namespace hal{
+namespace hal {
     void initDA();
     void setDA(float da);
     float getDA();

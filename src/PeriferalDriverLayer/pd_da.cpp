@@ -4,7 +4,7 @@
 #include "iodefine.h"
 
 
-namespace periferal_driver{
+namespace periferal_driver {
     void initDA() {
         SYSTEM.PRCR.WORD = 0xA502;
         MSTP(DA) = 0;
@@ -26,10 +26,10 @@ namespace periferal_driver{
 
     //RX71MのDACは12bit分解能なので0から4095までの値を設定可能
     void setDA(uint16_t da) {
-        if(DA.DADR1 != da){
+        if(DA.DADR1 != da) {
             DA.DADR1 = da;
             DA.DACR.BIT.DAOE1 = 1;
-        } 
+        }
     }
 
     uint16_t getDA() {

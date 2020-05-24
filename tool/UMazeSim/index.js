@@ -114,6 +114,7 @@ const template = [
 
 
 // Electronの初期化完了後に実行
+app.allowRendererProcessReuse = true; // 追加
 app.on('ready', function() {  
   mainWindow = new BrowserWindow({width: WINDOW_WIDTH, height: WINDOW_HEIGHT, useContentSize: true, webPreferences: { nodeIntegration: true }});  
   //mainWindow.setMenu(null);

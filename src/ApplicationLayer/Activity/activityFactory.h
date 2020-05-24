@@ -1,9 +1,10 @@
 #pragma once
 
-#include "BaseActivity.h"
+#include "baseActivity.h"
 
 #include <stdint.h>
 #include <memory>
+namespace activity {
 
 enum class EActivityColor : uint8_t {
     BLACK = 0,
@@ -17,9 +18,11 @@ enum class EActivityColor : uint8_t {
 };
 
 class ActivityFactory {
-    public:
+  public:
     static std::unique_ptr<BaseActivity> create(EActivityColor name);
-    static std::unique_ptr<BaseActivity> cteateSubModeSelect();
+    //static std::unique_ptr<BaseActivity> cteateSubModeSelect();
     static std::unique_ptr<BaseActivity> cteateModeSelect();
 
 };
+
+}

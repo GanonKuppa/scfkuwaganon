@@ -6,7 +6,7 @@
 //8bitフリーランニングカウンタとして動作
 //TMR0をSPI受信時の待ち時間生成に利用
 
-namespace periferal_driver{
+namespace periferal_driver {
     void initTMR0() {
         SYSTEM.PRCR.WORD = 0xA502;
         SYSTEM.MSTPCRA.BIT.MSTPA5 = 0; //TMR0と1 ON

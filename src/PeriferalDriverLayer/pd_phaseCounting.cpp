@@ -3,7 +3,7 @@
 #include "pd_phaseCounting.h"
 
 
-namespace periferal_driver{
+namespace periferal_driver {
     void initMTU1() {
         SYSTEM.PRCR.WORD = 0xA502;
         MSTP(MTU1) = 0;

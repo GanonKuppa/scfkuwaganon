@@ -1,4 +1,4 @@
-cmake_minimum_required(VERSION 2.8)
+cmake_minimum_required(VERSION 3.1)
 
 # message(cmake -G "MinGW Makefiles" ..) windowsでは以下でcmakeを叩くこと
 
@@ -6,20 +6,44 @@ message(STATUS  "======== scfkuwaganon sils cmake ========")
 set(CMAKE_C_COMPILER "C:/Program Files/mingw-w64/x86_64-8.1.0-posix-sjlj-rt_v6-rev0/mingw64/bin/gcc")
 set(CMAKE_CXX_COMPILER "C:/Program Files/mingw-w64/x86_64-8.1.0-posix-sjlj-rt_v6-rev0/mingw64/bin/g++")
 set(CMAKE_CXX_STANDARD, 14)
+set(CMAKE_CXX_FLAGS "-O2 -Wall -DSILS")
 
-file(GLOB_RECURSE APP_ACTIVITY_H src/ApplicationLayer/*.h)
-file(GLOB_RECURSE APP_ACTIVITY_CPP src/ApplicationLayer/*.cpp)
+set(APP_ACTIVITY_H src/ApplicationLayer/Activity)
+file(GLOB_RECURSE APP_ACTIVITY_CPP src/ApplicationLayer/Activity/*.cpp)
+
+set(HAL_H src/HardwareAbstractionLayer)
+file(GLOB_RECURSE HAL_CPP src/HardwareAbstractionLayer/*.cpp)
+
+set(SILS_UTIL_H src/SilsUtil)
+file(GLOB_RECURSE SILS_UTIL_CPP src/SilsUtil/*.cpp)
+
+set(APP_MODULE_H src/ApplicationLayer/Module)
+file(GLOB_RECURSE MODULE_CPP src/ApplicationLayer/Module/*.cpp)
+
 
 set(EIGEN_DIR src/ApplicationLayer/Lib/Eigen)
 
-message(STATUS ${MY_SOURCE})
-#include_directories(${APP_ACTIVITY_H})
-#                    src/HardwareAbstractionLayer 
-#                    src/PeriferalDriver)
+message(STATUS ${HAL_H})
+message(STATUS ${APP_ACTIVITY_H})
+message(STATUS ${APP_MODULE_H})
+message(STATUS ${SILS_UTIL_H})
 
-include_directories(src/ApplicationLayer/Lib/Eigen)
+
+include_directories(
+    ${EIGEN_DIR}
+    ${APP_ACTIVITY_H}
+    ${HAL_H}
+    ${APP_MODULE_H}
+    ${SILS_UTIL_H}
+)
 
 #target_link_libraries(main -lboost_system -lboost_filesystem)
 
-add_executable(sils_main src/sils_main.cpp)
+add_executable(sils_main 
+    src/sils_main.cpp
+    ${APP_ACTIVITY_CPP}
+    ${HAL_CPP}
+    ${MODULE_CPP}
+    ${SILS_UTIL_CPP}
+)
 target_link_libraries(sils_main wsock32 ws2_32)

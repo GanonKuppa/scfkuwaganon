@@ -56,14 +56,14 @@ extern void __main() {
 extern "C" void timerInterrupt0();
 extern "C" void timerInterrupt1();
 
-void timerInterrupt0(){
+void timerInterrupt0() {
     //http://japan.renesasrulz.com/cafe_rene/f/69/t/1515.aspx 多重割り込み 資料
     __builtin_rx_setpsw('I');
 
     module::LedController::getInstance().update();
 }
 
-void timerInterrupt1(){
+void timerInterrupt1() {
 
 }
 
@@ -78,7 +78,7 @@ int main(void) {
 }
 
 //各ペリフェラルの初期化
-void halInit() {    
+void halInit() {
     hal::initClock();
     hal::initGpio();
     hal::initTimer();
@@ -107,7 +107,7 @@ void startUpInit() {
 }
 
 
-void object_init() {    
+void object_init() {
     //module::LedController::getInstance().setDeltaT(0.00025);
 }
 

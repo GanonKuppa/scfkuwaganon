@@ -66,9 +66,10 @@ function init(data) {   /* eslint-disable-line no-unused-vars */
   let animate_count = 0;
   let fps_begin_time = 0;
   let fps_end_time = 0;
-  
+  umobj.setRobotPos(x,y,ang);
+
   function render() {
-    umobj.setRobotPos(x,y,ang);
+    
     if(animate_count % 60 == 0) fps_begin_time = ( performance || Date ).now();
     
     if(animate_count % 600 == 0) umobj.updateRobotContrail(scene);
@@ -107,4 +108,4 @@ function init(data) {   /* eslint-disable-line no-unused-vars */
 }
 
 
-export {init, x, y, ang, v, x_target, y_target, v_target};
+export {init};

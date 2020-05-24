@@ -2,7 +2,7 @@
 
 #include <stdint.h>
 
-namespace hal{
+namespace hal {
     void initPhaseCounting0();
     void initPhaseCounting1();
     uint16_t getPhaseCount0();

@@ -1,8 +1,8 @@
-#pragma once 
+#pragma once
 
 #include <stdint.h>
 
-namespace periferal_driver{
+namespace periferal_driver {
     void initRSPI0();
     void initRSPI1();
     uint8_t communicate8bitRSPI0(uint8_t transmit);

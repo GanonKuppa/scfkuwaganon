@@ -25,7 +25,7 @@
  */
 //=====================================================================//
 
-namespace periferal_driver{
+namespace periferal_driver {
 
     static const uint32_t data_flash_block = 64; // データ・フラッシュのブロックサイズ
     static const uint32_t data_flash_size = 65536; // データ・フラッシュの容量
