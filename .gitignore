@@ -12,3 +12,5 @@ umouse_scfkuwaganon Debug.launch
 umouse_scfkuwaganon HardwareDebug.launch
 *node_modules/
 *build/
+tool/doxygen/html
+tool/doxygen/*.tmp

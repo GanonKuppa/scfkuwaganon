@@ -108,7 +108,7 @@ function doJsonCmd(data) {
         umobj.setWall32(data["x"], data["y"], data["east"], data["north"], data["west"], data["south"]);
         break;
       case 'SET_ROBOT_COLOR':
-        umobj.setRobotColor(data["r"], data["g"], data["b"]);
+        umobj.setRobotColor(data["r"], data["g"], data["b"]);        
         break;
       case 'SET_ROBOT_POS':
         umobj.setRobotPos(data["x"], data["y"], data["ang"]);

@@ -3,6 +3,10 @@
 
 #ifndef SILS
 #include "pd_timer.h"
+#else
+#include <chrono>
+static std::chrono::system_clock::time_point start;
+
 #endif
 namespace hal {
     void initTimer() {
@@ -10,6 +14,8 @@ namespace hal {
         periferal_driver::initCMTW0();
         periferal_driver::initCMTW1();
         periferal_driver::initTPU0();
+#else
+        start = std::chrono::system_clock::now(); // 計測開始時間
 #endif
     }
 
@@ -57,19 +63,23 @@ namespace hal {
 
     void waitClockCount_sub(uint32_t cCount) {
 #ifndef SILS
-        return periferal_driver::waitClockCount_sub(cCount);
+        periferal_driver::waitClockCount_sub(cCount);
 #endif
     }
 
     void waitusec_sub(uint32_t usec) {
 #ifndef SILS
         periferal_driver::waitusec_sub(usec);
+#else
+        waitusec(usec);
 #endif
     }
 
     void waitmsec_sub(uint32_t msec) {
 #ifndef SILS
         periferal_driver::waitmsec_sub(msec);
+#else
+        waitmsec(msec);
 #endif
     }
 
@@ -100,7 +110,10 @@ namespace hal {
 #ifndef SILS
         return periferal_driver::getElapsedMsec();
 #else
-        return 0;
+        std::chrono::system_clock::time_point end; // 型は auto で可
+        end = std::chrono::system_clock::now();  // 計測終了時間
+        double elapsed = std::chrono::duration_cast<std::chrono::microseconds>(end-start).count() * 1000.0;
+        return (uint32_t)elapsed;
 #endif
     }
 

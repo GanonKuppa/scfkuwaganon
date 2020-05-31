@@ -36,11 +36,11 @@ namespace activity {
                 return std::make_unique<ModeSelectActivity>();
         }
     }
-/*
-    std::unique_ptr<BaseActivity> ActivityFactory::cteateSubModeSelect() {
-        return std::make_unique<SubModeSelectActivity>();
-    }
-*/
+    /*
+        std::unique_ptr<BaseActivity> ActivityFactory::cteateSubModeSelect() {
+            return std::make_unique<SubModeSelectActivity>();
+        }
+    */
 
     std::unique_ptr<BaseActivity> ActivityFactory::cteateModeSelect() {
         return std::make_unique<ModeSelectActivity>();

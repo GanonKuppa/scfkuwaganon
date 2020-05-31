@@ -26,8 +26,14 @@
 #include "hal_timerInterrupt.h"
 #include "hal_wdt.h"
 
+
+
 // Module
 #include "ledController.h"
+
+// Activity
+#include "ActivityFactory.h"
+
 
 // プロトタイプ宣言
 void halInit();
@@ -71,7 +77,7 @@ int main(void) {
     halInit();
     startUpInit();
     while(1) {
-        auto activity = ActivityFactory::createModeSelect();
+        auto activity = activity::ActivityFactory::cteateModeSelect();
         activity->start();
     }
     return 0;

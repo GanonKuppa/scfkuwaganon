@@ -46,4 +46,9 @@ add_executable(sils_main
     ${MODULE_CPP}
     ${SILS_UTIL_CPP}
 )
-target_link_libraries(sils_main wsock32 ws2_32)
+target_link_libraries(sils_main 
+    wsock32 
+    ws2_32 
+    Xinput
+    winmm
+)

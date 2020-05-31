@@ -1,18 +1,21 @@
 #pragma once
 
-#include "baseActivity.h"
+#include <stdint.h>
 
-namespace activity{
+#include "baseActivity.h"
+#include "activityFactory.h"
+
+namespace activity {
 
     class ModeSelectActivity : public BaseActivity {
       public:
-        void onStart(){}
-
-        ELoopStatus loop() {
-            return ELoopStatus::CONTINUE;
-        }
-
-        void onFinish(){}
+        void onStart();
+        void onFinish();
+        ELoopStatus loop();
+      private:
+        uint8_t _mode;
+        void turnFcled();
+        EActivityColor modeNum2Color(uint8_t mode);
     };
 
 
