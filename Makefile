@@ -11,6 +11,7 @@ ifeq ($(OS),Windows_NT)
 	MAKE_CMD   := cd build & make
 	NINJA_CMD  := cd build & C:/ninja-win/ninja
 	UMAZE_SIM_RUN_CMD := cd tool/UMazeSim & npm run run	
+	HELP :=echo\==== target list ==== & findstr -r "[a-z][^\.PHONY][a-z]:" Makefile
 endif
 
 .PHONY: sim
@@ -40,7 +41,7 @@ sils_ninja:
 
 .PHONY: build_mot
 build_mot:
-	@ cd HardwareDebug & make -j8 all
+	@ cd HardwareDebug & make -j all
 
 .PHONY: clean
 clean:
@@ -55,3 +56,7 @@ format:
 .PHONY: doxygen
 doxygen:
 	@- cd tool/doxygen & run_doxygen.bat
+
+.PHONY: help
+help:
+	@- $(HELP)
