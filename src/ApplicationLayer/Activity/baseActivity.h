@@ -4,6 +4,9 @@
 #include "hal_timer.h"
 #include <utility>
 #include <memory>
+#include <string>
+
+#include "debugLog.h"
 
 
 namespace activity {
@@ -13,7 +16,14 @@ namespace activity {
         void start(std::unique_ptr<Intent> intent) {
             _lower_limit_loop_msec = 1;
             _intent = std::move(intent);
+            std::string mode_name("ModeSelectActivity");
+            //PRINTF_ASYNC("--- %s start ---\n", "hoge");
+            module::Communication::getInstance().printfAsync("--- %s start ---\n", "hoge");
+            module::Communication::getInstance().printfAsync("--- %d start ---\n", 100);
+
+            printf("--- %s start ---\n", "hoge");
             onStart();
+            
             while(1) {
                 hal::startTimeuCount_sub();
                 uint32_t start_msec = hal::getElapsedMsec();
@@ -24,6 +34,8 @@ namespace activity {
                 if(wait_msec > 0) hal::waitmsec(wait_msec);
                 hal::endTimeuCount_sub();
             };
+
+            PRINTF_ASYNC("--- %s end ---\n", getModeName().c_str());
             onFinish();
         }
 
@@ -39,13 +51,14 @@ namespace activity {
             FINISH = 0
         };
 
+        virtual std::string getModeName() = 0;
         virtual ELoopStatus loop() = 0;
         virtual void onStart() = 0;
         virtual void onFinish() = 0;
 
 
         uint32_t _lower_limit_loop_msec;
-        std::unique_ptr<Intent> _intent;
+        std::unique_ptr<Intent> _intent;        
 
     };
 

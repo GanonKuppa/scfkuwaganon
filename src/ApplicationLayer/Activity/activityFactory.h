@@ -20,7 +20,7 @@ namespace activity {
     class ActivityFactory {
       public:
         static std::unique_ptr<BaseActivity> create(EActivityColor name);
-        //static std::unique_ptr<BaseActivity> cteateSubModeSelect();
+//        static std::unique_ptr<BaseActivity> cteateSubModeSelect();
         static std::unique_ptr<BaseActivity> cteateModeSelect();
 
     };

@@ -9,7 +9,7 @@
 
 namespace activity {
 
-    class DebugActivity : public BaseActivity {
+    class FullAutoRunActivity : public BaseActivity {
       public:
         std::string getModeName();
         void onStart();

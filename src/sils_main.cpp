@@ -34,6 +34,7 @@
 // Module
 #include "ledController.h"
 #include "gamepad.h"
+#include "communication.h"
 
 // Activity
 #include "ActivityFactory.h"
@@ -111,7 +112,7 @@ int main() {
     halInit();
     startUpInit();
     object_init();
-    module::LedController::getInstance().flashFcled(1,0,1, 1.0, 0.5);
+    //module::LedController::getInstance().flashFcled(1,0,1, 1.0, 0.5);
     std::thread t1(worker1);
     std::thread t2(worker2);
 
@@ -155,5 +156,6 @@ void startUpInit() {
 
 void object_init() {
     module::LedController::getInstance().setDeltaT(0.00025);
-    module::LedController::getInstance().setDeltaT(0.001);
+    module::Gamepad::getInstance();
+    module::Communication::getInstance();
 }

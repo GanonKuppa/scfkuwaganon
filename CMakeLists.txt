@@ -20,21 +20,28 @@ file(GLOB_RECURSE SILS_UTIL_CPP src/SilsUtil/*.cpp)
 set(APP_MODULE_H src/ApplicationLayer/Module)
 file(GLOB_RECURSE MODULE_CPP src/ApplicationLayer/Module/*.cpp)
 
+set(APP_MESSAGE_H src/ApplicationLayer/Message/)
+file(GLOB_RECURSE APP_MESSAGE_CPP src/ApplicationLayer/Message/*.cpp)
 
 set(EIGEN_DIR src/ApplicationLayer/Lib/Eigen)
+set(LIB_H src/ApplicationLayer/Lib)
+
 
 message(STATUS ${HAL_H})
 message(STATUS ${APP_ACTIVITY_H})
 message(STATUS ${APP_MODULE_H})
+message(STATUS ${APP_MESSAGE_H})
 message(STATUS ${SILS_UTIL_H})
 
 
 include_directories(
     ${EIGEN_DIR}
-    ${APP_ACTIVITY_H}
     ${HAL_H}
+    ${APP_ACTIVITY_H}
     ${APP_MODULE_H}
+    ${APP_MESSAGE_H}
     ${SILS_UTIL_H}
+    ${LIB_H}
 )
 
 #target_link_libraries(main -lboost_system -lboost_filesystem)

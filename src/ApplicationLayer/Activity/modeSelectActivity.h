@@ -1,14 +1,16 @@
 #pragma once
 
 #include <stdint.h>
-
-#include "baseActivity.h"
+#include <string>
 #include "activityFactory.h"
+#include "baseActivity.h"
+
 
 namespace activity {
 
     class ModeSelectActivity : public BaseActivity {
       public:
+        std::string getModeName();
         void onStart();
         void onFinish();
         ELoopStatus loop();

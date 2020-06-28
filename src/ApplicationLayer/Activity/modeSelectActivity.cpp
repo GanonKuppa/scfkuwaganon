@@ -1,21 +1,53 @@
 #include "modeSelectActivity.h"
 #include <stdint.h>
+#include <string>
+
 // Module
 #include "ledController.h"
 #include "activityFactory.h"
+#include "gamepad.h"
+#include "seManager.h"
+#include "baseActivity.h"
 
 namespace activity {
 
+    std::string ModeSelectActivity::getModeName()
+    {
+        std::string mode_name("ModeSelectActivity");
+        return mode_name;
+    }
 
     void ModeSelectActivity::onStart() {
-
+        
     }
 
     void ModeSelectActivity::onFinish() {
-
+        
     }
 
     ModeSelectActivity::ELoopStatus ModeSelectActivity::loop() {
+        module::Gamepad &gp = module::Gamepad::getInstance();
+        
+        if(gp.cross_y == 1){
+            _mode =  (_mode + 8 + 1) % 8;
+            hal::waitmsec(100);
+            sound::cursor_move();
+        }
+        
+        if(gp.cross_y == -1){
+            _mode =  (_mode + 8 - 1) % 8;
+            hal::waitmsec(100);
+            sound::cursor_move();
+        }
+
+        if(gp.B > 50 && gp.B < 100){
+            hal::waitmsec(100);
+            sound::confirm();
+        }
+
+
+
+        turnFcled();
         return ELoopStatus::CONTINUE;
     }
 
@@ -24,7 +56,7 @@ namespace activity {
 
         //PseudoDialL& dial_L = PseudoDialL::getInstance();
         module::LedController& fcled = module::LedController::getInstance();
-        uint8_t mode = 0;//dial_L.getDialPosition();
+        uint8_t mode = _mode;//dial_L.getDialPosition();
         //UMouse& m = UMouse::getInstance();
         //ParameterManager& pm = ParameterManager::getInstance();
         //m.maze.makeFastestMap(0, 0);

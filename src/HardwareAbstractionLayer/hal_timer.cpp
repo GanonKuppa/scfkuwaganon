@@ -5,6 +5,7 @@
 #include "pd_timer.h"
 #else
 #include <chrono>
+#include <unistd.h>
 static std::chrono::system_clock::time_point start;
 
 #endif
@@ -29,12 +30,16 @@ namespace hal {
     void waitusec(uint32_t usec) {
 #ifndef SILS
         periferal_driver::waitusec(usec);
+#else
+        usleep(usec);
 #endif
     }
 
     void waitmsec(uint32_t msec) {
 #ifndef SILS
         periferal_driver::waitmsec(msec);
+#else
+        usleep(msec * 1000);
 #endif
     }
 
