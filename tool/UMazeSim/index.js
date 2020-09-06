@@ -29,7 +29,7 @@ app.on('window-all-closed', function() {
 const yaml = require('js-yaml');
 // configファイルを読み込み
 try {
-  const config = yaml.safeLoad(fs.readFileSync('src/config.yaml', 'utf8'));
+  const config = yaml.safeLoad(fs.readFileSync('./src/config.yaml', 'utf8'));
   var UDP_PORT = config["UDP_PORT"];
   var WINDOW_WIDTH = config["WINDOW_WIDTH"];
   var WINDOW_HEIGHT =  config["WINDOW_HEIGHT"];  
@@ -57,14 +57,20 @@ const template = [
             subWindow.removeMenu();
             subWindow.loadURL('file://' + __dirname + '/UMazeEditor.html');
           }},
-          { label:"export maze", click:()=> {
+          { label:"import maze (json)", click:()=> {
+            openFile();
+            //subWindow = new BrowserWindow({width: 750, height: 650, useContentSize: true, webPreferences: { nodeIntegration: true , zoomFactor: 0.5}});  
+            //subWindow.removeMenu();
+            //subWindow.loadURL('file://' + __dirname + '/UMazeEditor.html');
+          }},
+          { label:"export maze (json)", click:()=> {
             saveFile();
             //subWindow = new BrowserWindow({width: 750, height: 650, useContentSize: true, webPreferences: { nodeIntegration: true , zoomFactor: 0.5}});  
             //subWindow.removeMenu();
             //subWindow.loadURL('file://' + __dirname + '/UMazeEditor.html');
           }},
-          { label:"import maze", click:()=> {
-            openFile();
+          { label:"export maze (stl)", click:()=> {
+            saveStl();
             //subWindow = new BrowserWindow({width: 750, height: 650, useContentSize: true, webPreferences: { nodeIntegration: true , zoomFactor: 0.5}});  
             //subWindow.removeMenu();
             //subWindow.loadURL('file://' + __dirname + '/UMazeEditor.html');
@@ -191,4 +197,16 @@ function readFile(path) {
         if (err) throw err;
     });  
   })
+}
+
+function saveStl() {
+  const udp_server = dgram.createSocket('udp4');
+  const data = {
+    "cmd": "SAVE_STL"
+  };
+  const send_data = Buffer.from(JSON.stringify(data));
+  udp_server.send(send_data, 0, send_data.length, UDP_PORT, "127.0.0.1", (err, bytes) => {
+      if (err) throw err;
+  });  
+
 }

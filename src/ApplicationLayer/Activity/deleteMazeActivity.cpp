@@ -1,5 +1,5 @@
 #include "deleteMazeActivity.h"
-#ifdef CMTOUT_
+
 
 namespace activity{    
 
@@ -26,4 +26,3 @@ namespace activity{
     }
 }
 
-#endif

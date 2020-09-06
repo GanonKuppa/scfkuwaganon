@@ -1,6 +1,5 @@
 #include "calibrateWallCenterActivity.h"
 
-#ifdef CMTOUT_
 namespace activity{    
 
 
@@ -25,5 +24,3 @@ namespace activity{
         return ELoopStatus::CONTINUE;
     }
 }
-
-#endif

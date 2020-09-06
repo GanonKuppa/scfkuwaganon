@@ -16,12 +16,10 @@ namespace activity {
         void start(std::unique_ptr<Intent> intent) {
             _lower_limit_loop_msec = 1;
             _intent = std::move(intent);
-            std::string mode_name("ModeSelectActivity");
-            //PRINTF_ASYNC("--- %s start ---\n", "hoge");
-            module::Communication::getInstance().printfAsync("--- %s start ---\n", "hoge");
-            module::Communication::getInstance().printfAsync("--- %d start ---\n", 100);
+            //std::string mode_name("ModeSelectActivity");
+            
+            PRINTF_ASYNC("--- %s start ---\n", getModeName().c_str());
 
-            printf("--- %s start ---\n", "hoge");
             onStart();
             
             while(1) {
@@ -58,7 +56,7 @@ namespace activity {
 
 
         uint32_t _lower_limit_loop_msec;
-        std::unique_ptr<Intent> _intent;        
+        std::unique_ptr<Intent> _intent;
 
     };
 

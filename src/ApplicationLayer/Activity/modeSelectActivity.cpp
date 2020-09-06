@@ -5,9 +5,12 @@
 // Module
 #include "ledController.h"
 #include "activityFactory.h"
-#include "gamepad.h"
 #include "seManager.h"
 #include "baseActivity.h"
+
+// Msg
+#include "msgBroker.h"
+#include "gamepadMsg.h"
 
 namespace activity {
 
@@ -22,27 +25,32 @@ namespace activity {
     }
 
     void ModeSelectActivity::onFinish() {
-        
+        EActivityColor color = modeNum2Color(_mode);
+        PRINTF_ASYNC("color num = %d\n",int(color));
+
+        auto activity = ActivityFactory::create(color);
+        activity->start();
     }
 
-    ModeSelectActivity::ELoopStatus ModeSelectActivity::loop() {
-        module::Gamepad &gp = module::Gamepad::getInstance();
-        
-        if(gp.cross_y == 1){
-            _mode =  (_mode + 8 + 1) % 8;
+    ModeSelectActivity::ELoopStatus ModeSelectActivity::loop() {        
+        copyMsg(msg_id::GAMEPAD, &_gp_msg);        
+
+        if(_gp_msg.cross_y == 1){
+            _mode =  (_mode + MODE_NUM + 1) % MODE_NUM;
             hal::waitmsec(100);
             sound::cursor_move();
         }
         
-        if(gp.cross_y == -1){
-            _mode =  (_mode + 8 - 1) % 8;
+        if(_gp_msg.cross_y == -1){
+            _mode =  (_mode + MODE_NUM - 1) % MODE_NUM;
             hal::waitmsec(100);
             sound::cursor_move();
         }
 
-        if(gp.B > 50 && gp.B < 100){
+        if(_gp_msg.B > 2000){
             hal::waitmsec(100);
             sound::confirm();
+            return ELoopStatus::FINISH;
         }
 
 
@@ -52,8 +60,6 @@ namespace activity {
     }
 
     void ModeSelectActivity::turnFcled() {
-//module::LedController& fcled = module::LedController::getInstance();
-
         //PseudoDialL& dial_L = PseudoDialL::getInstance();
         module::LedController& fcled = module::LedController::getInstance();
         uint8_t mode = _mode;//dial_L.getDialPosition();

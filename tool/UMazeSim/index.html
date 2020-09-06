@@ -23,7 +23,16 @@
     <canvas id="c" tabindex="1"></canvas>    
   </body>
 
-<script>
+
+
+
+
+
+
+<script  type="module">
+import * as umobj from "./src/js/UMouseObject.js"
+import * as FileSaver from './src/js/lib/FileSaver.js'
+
 'use strict';  // eslint-disable-line
 const time_start = ( performance || Date ).now();
 const fs = require('fs');
@@ -221,6 +230,13 @@ function main() {  /* eslint consistent-return: 0 */
         const fs = require('fs');
         console.log(json);
         fs.writeFileSync(json['path'] ,JSON.stringify(maze_data));
+      }
+      else if(json['cmd'] == 'SAVE_STL'){
+        let str = umobj.makeMazeStlString(maze_data);
+        var blob = new Blob( [str], { type : 'text/plain' } ); // Generate Blob from the string
+        FileSaver.saveAs( blob, 'maze_data32.stl' ); //Save the Blob to file.stl
+        console.log(json);
+        console.log(str);
       }
       
       json['type'] = 'doJsonCmd';

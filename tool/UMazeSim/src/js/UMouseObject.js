@@ -1,6 +1,8 @@
 import * as THREE from './lib/three.module.js';
 import { STLLoader } from './lib/STLLoader.js';
+import { STLExporter } from './lib/STLExporter.js'
 import * as byteUtil from  './byteUtil.js';
+
 
 let ground_ref;
 let table_ref;
@@ -891,6 +893,125 @@ function getMaze32(){
 }
 
 
+function makeMazeStlString(maze_data){
+  console.log(maze_data);
+  let scene = new THREE.Scene();
+  let geometrys = new THREE.Geometry();
+  // 土台
+  let table = new THREE.Mesh(new THREE.BoxGeometry(0.18 * 18, 0.18 * 18, 0.25));
+  table.position.set(0.18 * 8.0, 0.18 * 8.0, -0.25 / 2);
+  geometrys.mergeMesh(table);
+  
+  // 柱
+  for (let j = 0; j < 33; j++) {
+    for (let i = 0; i < 33; i++) {
+
+      let cube1 = new THREE.Mesh(new THREE.BoxGeometry(0.006, 0.006, 0.025));
+      cube1.position.set(j * 0.09, i * 0.09, 0.025 * 0.5);
+
+      let cube2 = new THREE.Mesh(new THREE.BoxGeometry(0.006, 0.006, 0.0005));
+      cube2.position.set(j * 0.09, i * 0.09, 0.025);
+
+      geometrys.mergeMesh(cube1);
+      geometrys.mergeMesh(cube2);
+    }  
+  }
+
+  // 壁外周
+  let walls32_v_ = new Array(33);
+  let walls32_h_ = new Array(33);  
+
+  for (let i = 0; i < 33; i++) {
+    walls32_v_[i] = new Array(32);
+    walls32_h_[i] = new Array(32);
+  }
+  
+  for (let i = 0; i < 33; i++){
+    for (let j = 0; j < 32; j++){
+      walls32_v_[i][j] = 0;
+      walls32_h_[i][j] = 0;
+    }
+  }
+
+  for (let j = 0; j < 32; j++){
+    walls32_v_[0][j] = 1;
+    walls32_h_[0][j] = 1;
+    walls32_v_[32][j] = 1;
+    walls32_h_[32][j] = 1;
+  }
+
+  // 壁中身
+  const walls_vertical_list = byteUtil.hexstr2intList(maze_data["walls_v_hex"], 124*2);
+  const walls_horizontal_list = byteUtil.hexstr2intList(maze_data["walls_h_hex"], 124*2);
+
+
+
+  for (let i = 0; i < 31; i++) {
+    const byte0 = walls_vertical_list[i * 4 + 0];
+    const byte1 = walls_vertical_list[i * 4 + 1];
+    const byte2 = walls_vertical_list[i * 4 + 2];
+    const byte3 = walls_vertical_list[i * 4 + 3];
+    const bitList = byteUtil.byte4to32bit(byte0, byte1, byte2, byte3);
+
+
+    for (let j = 0; j < 32; j++) {
+      if(bitList[j] == 1){
+        walls32_v_[i+1][j] = 1;
+      } 
+      else walls32_v_[i+1][j] = 0;
+    }
+  }
+
+  
+  for (let i = 0; i < 31; i++) {
+    const byte0 = walls_horizontal_list[i * 4 + 0];
+    const byte1 = walls_horizontal_list[i * 4 + 1];
+    const byte2 = walls_horizontal_list[i * 4 + 2];
+    const byte3 = walls_horizontal_list[i * 4 + 3];
+    const bitList = byteUtil.byte4to32bit(byte0, byte1, byte2, byte3);
+
+    for (let j = 0; j < 32; j++) {
+      if(bitList[j] == 1){
+        walls32_h_[i+1][j] = 1;
+      } 
+      else walls32_h_[i+1][j] = 0;
+    }
+  }  
+  // 壁ジオメトリセット 
+
+  const geometry_wall32_v_ = new THREE.Mesh(new THREE.BoxGeometry(0.012 / 2, 0.168 / 2, 0.05 / 2));
+  const geometry_wall32_h_ = new THREE.Mesh(new THREE.BoxGeometry(0.168 / 2, 0.012 / 2, 0.05 / 2));
+  
+  for (let i = 0; i < 33; i++){
+    for (let j = 0; j < 32; j++){
+      if(walls32_v_[i][j] == 1){
+        geometry_wall32_v_.position.set((i * 0.09), j * 0.09 + 0.045, 0.025 / 2);
+        geometrys.mergeMesh(geometry_wall32_v_);
+      }
+
+      if(walls32_h_[i][j] == 1){
+        geometry_wall32_h_.position.set(j * 0.09 + 0.045, i * 0.09, 0.025 / 2);
+        geometrys.mergeMesh(geometry_wall32_h_);
+      }      
+    }
+  }
+
+
+  // メッシュ
+  let material = new THREE.MeshLambertMaterial({
+    color: 0xeeeeee
+  });
+  let mesh_white = new THREE.Mesh(geometrys, material);
+  scene.add(mesh_white);
+
+
+  var exporter = new STLExporter();
+  var str = exporter.parse( scene ); // Export the scene
+  return str;
+  
+
+}
+
 
 export{
   addGround, addLight, addTable, addPillar32, addWhiteLine32, addLetterCoorX32, addLetterCoorY32,        
@@ -904,6 +1025,6 @@ export{
   setWallsWithoutOuter32, setTextSquare, setTextSquareVisible, setAllTextSquareVisible,
   
   getMaze32,
-  wallsChangeTest32, wallsSetTest32
-
+  wallsChangeTest32, wallsSetTest32,  
+  makeMazeStlString
 };

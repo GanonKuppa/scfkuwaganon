@@ -11,36 +11,35 @@ namespace module {
     }
 
     int Communication::printfAsync(const char* fmt, ...){
-        int len;
+        int len = 0;
 
         va_list ap;
         va_start(ap, fmt);
+        static char buffer[1000];
+        len = vsprintf(buffer, fmt, ap);
 
 #ifndef SILS
-        //static char buffer[1000];
-        //len = vsprintf(buffer, fmt, ap);
         //putnbyteSCI1(buffer, len);        
 #else
-        len = printf(fmt, ap);
+        printf("%s", buffer);
 #endif
         va_end(ap);
         return len;
-
     }    
     
 
     int Communication::printfSync(const char* fmt, ...){
-        int len;
+        int len = 0;
 
         va_list ap;
         va_start(ap, fmt);
+        static char buffer[1000];
+        len = vsprintf(buffer, fmt, ap);
 
 #ifndef SILS
-        //static char buffer[1000];
-        //len = vsprintf(buffer, fmt, ap);
         //putnbyteSCI1(buffer, len);        
 #else
-        len = printf(fmt, ap);
+        len = printf("%s", buffer);
 #endif
         va_end(ap);
         return len;

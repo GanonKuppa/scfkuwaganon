@@ -7,9 +7,9 @@ enum class msg_id{
     IMU,
     WALL_SENSOR,
     WHEEL_ODOMETRY,
-    POSITION_ESTIMATOR
+    POSITION_ESTIMATOR,
+    GRAND_TRUTH
 };
 
-void msgPublish(msg_id msg_id, const void* msg);
-void msgCopy(msg_id msg_id, void* msg);
-
+void publishMsg(msg_id msg_id, void* msg);
+void copyMsg(msg_id msg_id, void* msg);

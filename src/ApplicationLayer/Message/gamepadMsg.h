@@ -4,6 +4,7 @@
 
 class GamepadMsg : public BaseMsg{
   public:
+    bool connected = false;
     int8_t cross_x = 0;
     int8_t cross_y = 0;
     int8_t L3D_x = 0;

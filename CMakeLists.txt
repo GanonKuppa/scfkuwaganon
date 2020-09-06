@@ -18,7 +18,7 @@ set(SILS_UTIL_H src/SilsUtil)
 file(GLOB_RECURSE SILS_UTIL_CPP src/SilsUtil/*.cpp)
 
 set(APP_MODULE_H src/ApplicationLayer/Module)
-file(GLOB_RECURSE MODULE_CPP src/ApplicationLayer/Module/*.cpp)
+file(GLOB_RECURSE APP_MODULE_CPP src/ApplicationLayer/Module/*.cpp)
 
 set(APP_MESSAGE_H src/ApplicationLayer/Message/)
 file(GLOB_RECURSE APP_MESSAGE_CPP src/ApplicationLayer/Message/*.cpp)
@@ -50,7 +50,8 @@ add_executable(sils_main
     src/sils_main.cpp
     ${APP_ACTIVITY_CPP}
     ${HAL_CPP}
-    ${MODULE_CPP}
+    ${APP_MODULE_CPP}
+    ${APP_MESSAGE_CPP}
     ${SILS_UTIL_CPP}
 )
 target_link_libraries(sils_main 

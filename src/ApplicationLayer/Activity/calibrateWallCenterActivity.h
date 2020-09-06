@@ -1,9 +1,7 @@
 #pragma once
 
-#ifdef CMTOUT_
 
 #include <stdint.h>
-
 #include "baseActivity.h"
 
 namespace activity {
@@ -19,5 +17,3 @@ namespace activity {
 
 
 }
-
-#endif

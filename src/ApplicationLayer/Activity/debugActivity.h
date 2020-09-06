@@ -1,6 +1,6 @@
 #pragma once
 
-#ifdef CMTOUT_
+
 
 #include <stdint.h>
 
@@ -20,4 +20,3 @@ namespace activity {
 
 }
 
-#endif

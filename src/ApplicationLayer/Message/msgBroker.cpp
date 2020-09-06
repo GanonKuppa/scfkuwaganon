@@ -8,6 +8,7 @@
 #include "wallSensorMsg.h"
 #include "wheelOdometryMsg.h"
 #include "imuMsg.h"
+#include "groundTruth.h"
 
 static BatteryVoltageMsg batteryVoltageMsg;
 static CtrlSetpointMsg ctrlSetpointMsg;
@@ -16,27 +17,30 @@ static ImuMsg imuMsg;
 static PositionEstimatorMsg positionEstimatorMsg;
 static WallSensorMsg wallSensorMsg;
 static WheelOdometryMsg wheelOdometryMsg;
+static GroundTruth groundTrughMsg;
 
 
 
-void msgPublish(msg_id msg_id, const void* msg){
+void publishMsg(msg_id msg_id, void* msg){
 
-    if     (msg_id == msg_id::BATTERY_VOLTAGE)   {batteryVoltageMsg    = *(BatteryVoltageMsg*)msg;}
-    else if(msg_id == msg_id::CTRL_SETPOINT)     {ctrlSetpointMsg      = *(CtrlSetpointMsg*)msg;}
-    else if(msg_id == msg_id::GAMEPAD)           {gamepadMsg           = *(GamepadMsg*)msg;}    
-    else if(msg_id == msg_id::IMU)               {imuMsg               = *(ImuMsg*)msg;}
+    if     (msg_id == msg_id::BATTERY_VOLTAGE)   {batteryVoltageMsg    = *(BatteryVoltageMsg*)msg   ;}
+    else if(msg_id == msg_id::CTRL_SETPOINT)     {ctrlSetpointMsg      = *(CtrlSetpointMsg*)msg     ;}
+    else if(msg_id == msg_id::GAMEPAD)           {gamepadMsg           = *(GamepadMsg*)msg          ;}    
+    else if(msg_id == msg_id::IMU)               {imuMsg               = *(ImuMsg*)msg              ;}
     else if(msg_id == msg_id::POSITION_ESTIMATOR){positionEstimatorMsg = *(PositionEstimatorMsg*)msg;}
-    else if(msg_id == msg_id::WALL_SENSOR)       {wallSensorMsg        = *(WallSensorMsg*)msg;}
-    else if(msg_id == msg_id::WHEEL_ODOMETRY)    {wheelOdometryMsg     = *(WheelOdometryMsg*) msg;}
+    else if(msg_id == msg_id::WALL_SENSOR)       {wallSensorMsg        = *(WallSensorMsg*)msg       ;}
+    else if(msg_id == msg_id::WHEEL_ODOMETRY)    {wheelOdometryMsg     = *(WheelOdometryMsg*) msg   ;}
+    else if(msg_id == msg_id::GROUND_TRUTH)      {groundTruthMsg        = *(groundTruthMsg*) msg    ;}
 
 }
 
-void msgCopy(msg_id msg_id, const void *msg){
-    if     (msg_id == msg_id::BATTERY_VOLTAGE)   {*(BatteryVoltageMsg*)msg = batteryVoltageMsg;}
-    else if(msg_id == msg_id::CTRL_SETPOINT)     {*(CtrlSetpointMsg*)msg = ctrlSetpointMsg;}
-    else if(msg_id == msg_id::GAMEPAD)           {*(GamepadMsg*)msg = gamepadMsg;}    
-    else if(msg_id == msg_id::IMU)               {*(ImuMsg*)msg = imuMsg;}
-    else if(msg_id == msg_id::POSITION_ESTIMATOR){*(PositionEstimatorMsg*)msg = positionEstimatorMsg;}
-    else if(msg_id == msg_id::WALL_SENSOR)       {*(WallSensorMsg*)msg = wallSensorMsg;}
-    else if(msg_id == msg_id::WHEEL_ODOMETRY)    {*(WheelOdometryMsg*) msg = wheelOdometryMsg;}
+void copyMsg(msg_id msg_id, void *msg){
+    if     (msg_id == msg_id::BATTERY_VOLTAGE)   {*(BatteryVoltageMsg*   ) msg = batteryVoltageMsg   ;}
+    else if(msg_id == msg_id::CTRL_SETPOINT)     {*(CtrlSetpointMsg*     ) msg = ctrlSetpointMsg     ;}
+    else if(msg_id == msg_id::GAMEPAD)           {*(GamepadMsg*          ) msg = gamepadMsg          ;}    
+    else if(msg_id == msg_id::IMU)               {*(ImuMsg*              ) msg = imuMsg              ;}
+    else if(msg_id == msg_id::POSITION_ESTIMATOR){*(PositionEstimatorMsg*) msg = positionEstimatorMsg;}
+    else if(msg_id == msg_id::WALL_SENSOR)       {*(WallSensorMsg*       ) msg = wallSensorMsg       ;}
+    else if(msg_id == msg_id::WHEEL_ODOMETRY)    {*(WheelOdometryMsg*    ) msg = wheelOdometryMsg    ;}
+    else if(msg_id == msg_id::GROUND_TRUTH)      {*(GroundTruthMsg*      ) msg = groundTruthMsg      ;}
 }

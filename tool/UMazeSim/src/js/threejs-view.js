@@ -1,6 +1,7 @@
 import * as THREE from './lib/three.module.js';
-import * as umobj from "./UMouseObject.js"
+import * as umobj from './UMouseObject.js'
 import {OrbitControls} from './lib/OrbitControls.js';
+
 
 let x = 0.045;
 let y = 0.045;
@@ -50,7 +51,6 @@ function init(data) {   /* eslint-disable-line no-unused-vars */
   umobj.addWalls32(scene);
   umobj.addRobot(scene);
   umobj.addTextSquare32(scene);
-
     
   function resizeRendererToDisplaySize(renderer) {
     const canvas = renderer.domElement;

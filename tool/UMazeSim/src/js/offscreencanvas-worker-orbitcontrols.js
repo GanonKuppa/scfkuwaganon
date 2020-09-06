@@ -5,6 +5,7 @@ import * as THREE from './lib/three.module.js';
 import * as SOrbitControls from './threejs-view.js';
 import * as umobj from "./UMouseObject.js";
 
+
 function noop() {
 }
 
@@ -64,8 +65,9 @@ class ProxyManager {
 }
 
 const proxyManager = new ProxyManager();
-let scene;
+
 function start(data) {
+  let scene;
   const proxy = proxyManager.getProxy(data.canvasId);
   proxy.body = proxy;  // HACK!
   self.window = proxy;
@@ -136,7 +138,8 @@ function doJsonCmd(data) {
       case 'UPDATE_WALL_SENSOR_VIEW':
         break;
       case 'SAVE_WALLS_WITHOUT_OUTER_32':
-        //umobj.saveMaze32(data["path"]);
+        break;
+      case 'SAVE_STL':
         break;
       default:
         break;

@@ -1,6 +1,6 @@
 #include "debugActivity.h"
 
-#ifdef CMTOUT_
+
 namespace activity{    
 
 
@@ -26,4 +26,3 @@ namespace activity{
     }
 }
 
-#endif
